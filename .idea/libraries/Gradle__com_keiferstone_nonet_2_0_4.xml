@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.keiferstone:nonet-2.0.4">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/nonet-2.0.4.aar/b00c1a615faedb5321edc4abc68d65dd/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/nonet-2.0.4.aar/b00c1a615faedb5321edc4abc68d65dd/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.keiferstone/nonet/2.0.4/b8b5dfb5f87c1f0918df870bea2f84fd48a8161b/nonet-2.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

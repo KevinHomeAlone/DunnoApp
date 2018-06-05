@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="password">Hasło</string>
+    <string name="create_account">Stwórz konto</string>
+    <string name="sign_in">Zaloguj</string>
+    <string name="forgot_password">Zapomniałem hasła :(</string>
+    <string name="error_field_cant_be_empty">Pole nie może być puste</string>
+    <string name="error">Błąd</string>
+    <string name="please_wait">Prosze czekać</string>
+</resources>

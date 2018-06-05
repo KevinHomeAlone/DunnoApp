@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="BasicButton">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">@android:color/primary_text_dark</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>

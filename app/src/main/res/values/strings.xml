@@ -1,6 +1,15 @@
 <resources>
-    <string name="app_name">Dunno</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name" translatable="false">Dunno</string>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
+    <string name="title_notifications" translatable="false">Notifications</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="password">Password</string>
+    <string name="create_account">Create account</string>
+    <string name="sign_in">Sign in</string>
+    <string name="forgot_password">Forgot password :(</string>
+    <string name="error_field_cant_be_empty">Field cannot be empty</string>
+    <string name="error">Error</string>
+    <string name="ok" translatable="false">Ok</string>
+    <string name="please_wait">Please wait</string>
 </resources>
