@@ -1,6 +1,7 @@
 package com.pieprzak.kevin.dunno.Model
 
 import com.beust.klaxon.Json
+import org.json.JSONObject
 
 data class Question (
     var id : Int?,
@@ -12,4 +13,16 @@ data class Question (
     var updatedAt : String?,
     var author : String,
     @Json(ignored = true)
-    var answers : ArrayList<Answer> = ArrayList())
+    var answers : ArrayList<Answer> = ArrayList()){
+    companion object {
+        fun fromJson(json: JSONObject) : Question{
+            val id = json.getInt("id")
+            val title = json.getString("title")
+            val body = json.getString("body")
+            val createdAt = json.getString("created_at")
+            val updatedAt = json.getString("updated_at")
+            val author = json.getString("author")
+            return Question(id, title, body, createdAt, updatedAt, author, ArrayList())
+        }
+    }
+}

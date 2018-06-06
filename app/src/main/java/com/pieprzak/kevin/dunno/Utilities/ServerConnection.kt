@@ -79,11 +79,17 @@ object ServerConnection {
                 .responseJson { request, response, result ->
                     // Fold result of query
                     result.fold({ json ->
-                        Log.d("JSON", json.array().toString())
+                        Log.d("JSON", json.content)
                         // Deserialize JSON
-                        val listOfCategories = Klaxon().parseArray<Question>(json.content)
+                        var listOfQuestions = ArrayList<Question>()
+                        //FIXME: Why klaxon stops progrss dialog?
+                        //val listOfQuestions = Klaxon().parseArray<Question>(json.content)
+                        for(i in 0 until json.array().length())
+                            listOfQuestions.add(Question.fromJson(json.array().getJSONObject(i)))
+
+                        //val listOfQuestions = Klaxon().parseArray<Question>(json.content)
                         // Call success
-                        succes(ArrayList(listOfCategories))
+                        succes(listOfQuestions)
                     }, { fuelError ->
                         Log.e("ERROR", fuelError.toString())
                         Log.e("RESPONSE", response.responseMessage)
