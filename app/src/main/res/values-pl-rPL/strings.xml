@@ -19,4 +19,7 @@
     <string name="cancel">Anuluj</string>
     <string name="my_dunnos">Moje dunnosy</string>
     <string name="settings">Ustawienia</string>
+    <string name="add_dunno">Dodaj dunnosa</string>
+    <string name="accept">Potwierdź</string>
+    <string name="adding_dunno">Dodaje dunnosa</string>
 </resources>

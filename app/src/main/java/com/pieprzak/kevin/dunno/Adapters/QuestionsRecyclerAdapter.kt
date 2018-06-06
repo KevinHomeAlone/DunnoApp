@@ -31,6 +31,7 @@ class QuestionsRecyclerAdapter(private val listOfQuestions: ArrayList<Question>,
 class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(item: Question) {
         Log.d("Question ", "${item.title} ${item.createdAt}")
+        itemView.userTextView.text = item.author
         itemView.titleTextView.text = item.title
         itemView.contentTextView.text = item.body
     }

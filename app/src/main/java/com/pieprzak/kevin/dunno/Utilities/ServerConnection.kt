@@ -23,7 +23,11 @@ object ServerConnection {
         FuelManager.instance.basePath = "http://37.233.102.13:3000/api/"
 
         //TODO: delete when normal authentication implemented
-        creditials["admin"] = "admin"
+        creditials["kevin"] = "kevin"
+        creditials["igor"] = "igor"
+        creditials["mateusz"] = "mateusz"
+        creditials["pawel"] = "pawel"
+        creditials["radek"] = "radek"
     }
 
     /**
@@ -79,6 +83,32 @@ object ServerConnection {
                         val listOfCategories = Klaxon().parseArray<Question>(json.content)
                         // Call success
                         succes(ArrayList(listOfCategories))
+                    }, { fuelError ->
+                        Log.e("ERROR", fuelError.toString())
+                        Log.e("RESPONSE", response.responseMessage)
+                        Log.e("REQUEST", request.toString())
+                        error(fuelError.exception)
+                    })
+                }
+    }
+
+    /**
+     * Adds new question
+     * @param author is username of author [String]
+     * @param title is title of a question [String]
+     * @param body is body of a question [String]
+     * @param succes is a callback
+     * @param error is a callback, with (Exception thrown by connection [Exception])
+     */
+    fun addQuestion(question: Question, succes: () -> Unit, error: (Exception) -> Unit) {
+        Fuel.post("questions")
+                .body(Klaxon().toJsonString(question))
+                .header(Pair("Content-Type", "application/json"))
+                .response { request, response, result ->
+                    // Fold result of query
+                    result.fold({ _ ->
+                        // Call success
+                        succes()
                     }, { fuelError ->
                         Log.e("ERROR", fuelError.toString())
                         Log.e("RESPONSE", response.responseMessage)
