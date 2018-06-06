@@ -23,6 +23,7 @@ object ServerConnection {
         FuelManager.instance.basePath = "http://37.233.102.13:3000/api/"
 
         //TODO: delete when normal authentication implemented
+        creditials["play_console_tests"] = "play_console_tests"
         creditials["kevin"] = "kevin"
         creditials["igor"] = "igor"
         creditials["mateusz"] = "mateusz"
