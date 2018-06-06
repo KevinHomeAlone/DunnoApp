@@ -23,4 +23,20 @@ object DialogFactory {
                 .show()
     }
 
+    fun buildNoInternetDialog(activity: Activity, retryAction: () -> Unit): MaterialDialog {
+        return MaterialDialog.Builder(activity)
+                .title(R.string.no_internet_connection)
+                .cancelable(false)
+                .neutralText(R.string.try_again)
+                .onNeutral { dialog, _ ->
+                    dialog.dismiss()
+                    retryAction()
+                }
+                .negativeText(R.string.cancel)
+                .onNegative { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .build()
+    }
+
 }

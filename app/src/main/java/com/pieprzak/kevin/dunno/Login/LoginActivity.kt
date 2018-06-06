@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         register_button.setOnClickListener {
-            runRegisterActivity(login_input_text.text.toString())
+            //runRegisterActivity(login_input_text.text.toString())
         }
 
         forgot_password_text.setOnClickListener {
@@ -89,7 +89,7 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    private fun runRegisterActivity(login: String?) {
+    private fun runRegisterActivity() {
 
     }
 

@@ -7,4 +7,16 @@
     <string name="error_field_cant_be_empty">Pole nie może być puste</string>
     <string name="error">Błąd</string>
     <string name="please_wait">Prosze czekać</string>
+    <string name="dunnos">Dunnosy</string>
+    <string name="title">Tytuł</string>
+    <string name="content">Treść</string>
+    <string name="author">Autor</string>
+    <string name="created">Stworzone</string>
+    <string name="updated">Aktualizacja</string>
+    <string name="loading_dunnos">Ładowanie dunno\'sów</string>
+    <string name="no_internet_connection">Brak połączenia internetowego</string>
+    <string name="try_again">Spróbuj ponownie</string>
+    <string name="cancel">Anuluj</string>
+    <string name="my_dunnos">Moje dunnosy</string>
+    <string name="settings">Ustawienia</string>
 </resources>

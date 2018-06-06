@@ -1,5 +1,5 @@
 Dunno
-# Dunno-Android
+# Dunno-Android - University project
 
 [**Kevin Pieprzak**](https://github.com/KevinHomeAlone)
 

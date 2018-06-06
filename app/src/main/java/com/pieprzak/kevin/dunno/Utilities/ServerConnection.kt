@@ -1,10 +1,13 @@
 package com.pieprzak.kevin.dunno.Utilities
 
+import android.content.Context
 import android.util.Log
 import com.beust.klaxon.Klaxon
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.core.FuelManager
+import com.keiferstone.nonet.ConnectionStatus
+import com.keiferstone.nonet.NoNet
 import com.pieprzak.kevin.dunno.Model.Question
 import org.json.JSONObject
 
@@ -83,5 +86,29 @@ object ServerConnection {
                         error(fuelError.exception)
                     })
                 }
+    }
+
+    /**
+     * Checks internet connection by pinging google.com
+     * @param context Application context
+     * @param online is a callback, when ping is succesfull
+     * @param offline is a callback, when ping is unsucessfull
+     */
+    fun checkInternetConnection(context: Context, online: () -> Unit, offline: () -> Unit) {
+        val configuration = NoNet.configure()
+                .endpoint("http://google.com")
+                .timeout(5)
+                .connectedPollFrequency(60)
+                .disconnectedPollFrequency(1)
+                .build()
+
+        NoNet.check(context)
+                .configure(configuration)
+                .callback { connectionStatus ->
+                    if (connectionStatus == ConnectionStatus.CONNECTED)
+                        online()
+                    else
+                        offline()
+                }.start()
     }
 }
