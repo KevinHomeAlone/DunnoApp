@@ -1,7 +1,8 @@
 Dunno
 # Dunno-Android - University project
 
-[**Kevin Pieprzak**](https://github.com/KevinHomeAlone)
+* [**Kevin Pieprzak**](https://github.com/KevinHomeAlone)
+* [**Igor Kurek**](https://github.com/ikurek)
 
 ## Platform Info:
 * Application ID: com.pieprzak.kevin.dunno
@@ -17,7 +18,7 @@ Dunno
 
 ## Libraries:
 * [Anko](https://github.com/Kotlin/anko)
-* [NoNet] (https://github.com/keiferstone/nonet)
-* [Klaxon] (https://github.com/cbeust/klaxon)
-* [MaterialDialogs] (https://github.com/afollestad/material-dialogs)
-* [Fuel] (https://github.com/kittinunf/Fuel)
+* [NoNet](https://github.com/keiferstone/nonet)
+* [Klaxon](https://github.com/cbeust/klaxon)
+* [MaterialDialogs](https://github.com/afollestad/material-dialogs)
+* [Fuel](https://github.com/kittinunf/Fuel)

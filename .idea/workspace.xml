@@ -6,26 +6,9 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e8e5d5e-08cd-4b2a-820a-965d79831e66" name="Default" comment="Browsing questions works, Added some s">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Adapters/QuestionsRecyclerAdapter.kt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_build_black_24dp.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_person_pin_black_24dp.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_question_answer_black_24dp.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/question_row.xml" />
+    <list default="true" id="6e8e5d5e-08cd-4b2a-820a-965d79831e66" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Fragments/QuestionsFragment.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Fragments/QuestionsFragment.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Login/LoginActivity.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Login/LoginActivity.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/MainActivity.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/MainActivity.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Model/Question.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Model/Question.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Utilities/DialogFactory.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Utilities/DialogFactory.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Utilities/ServerConnection.kt" afterPath="$PROJECT_DIR$/app/src/main/java/com/pieprzak/kevin/dunno/Utilities/ServerConnection.kt" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_questions.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_questions.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/navigation.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/navigation.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-pl-rPL/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-pl-rPL/strings.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -143,8 +126,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1" column="36" lean-forward="false" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+            <state relative-caret-position="420">
+              <caret line="23" column="8" lean-forward="true" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -2435,7 +2418,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Android_Keystore/keystore.jks" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1528246121080" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1528246562213" />
     <property name="device.picker.selection" value="fd4c6882" />
     <property name="ExportApk.ApkPath" value="C:\Users\kevin\Documents\Anroid_Projects\Dunno\app" />
     <property name="ExportApk.Flavors" value="" />
@@ -2773,7 +2756,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528238339026</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="✨ Browsing questions works, Added internet connection verifier, Updated bottom navigation bar">
+      <created>1528246224767</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1528246224767</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2859,7 +2849,8 @@
     <MESSAGE value="- Added login activity with all needed methods, ready to connect to server&#10;- Added 'must have' kit to gradle&#10;- Added icon" />
     <MESSAGE value="Added Question and Answer models, Added klaxon to parse json's, Added readme, Added blank first fragment" />
     <MESSAGE value=" Added Question and Answer models, Added klaxon to parse json's, Added readme, Added blank first fragment" />
-    <option name="LAST_COMMIT_MESSAGE" value=" Added Question and Answer models, Added klaxon to parse json's, Added readme, Added blank first fragment" />
+    <MESSAGE value="✨ Browsing questions works, Added internet connection verifier, Updated bottom navigation bar" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ Browsing questions works, Added internet connection verifier, Updated bottom navigation bar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -3202,8 +3193,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="36" lean-forward="false" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+        <state relative-caret-position="420">
+          <caret line="23" column="8" lean-forward="true" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
           <folding />
         </state>
       </provider>
