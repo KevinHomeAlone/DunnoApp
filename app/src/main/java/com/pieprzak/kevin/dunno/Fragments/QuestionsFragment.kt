@@ -4,10 +4,13 @@ package com.pieprzak.kevin.dunno.Fragments
 import android.os.Bundle
 import android.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.transition.TransitionInflater
+import android.transition.TransitionSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import bg.devlabs.transitioner.Transitioner
 import com.afollestad.materialdialogs.MaterialDialog
 import com.pieprzak.kevin.dunno.Adapters.QuestionsRecyclerAdapter
 import com.pieprzak.kevin.dunno.Model.Question
@@ -61,8 +64,8 @@ class QuestionsFragment : Fragment() {
                 val question = Question(null, title, content, null, null,
                         userName)
                 Log.d("Created question: ", "$title $content $userName")
-                //titleTextView.text.clear()
-                //contentTextView.text.clear()
+                titleTextView.text.clear()
+                contentTextView.text.clear()
                 addQuestionDialog!!.hide()
                 addQuestionToServer(question)
             }
@@ -140,5 +143,21 @@ class QuestionsFragment : Fragment() {
             progressDialogLoadingQuestions!!.dismiss()
     }
 
+    fun makeTransition(startView: View, questionDetailsFragment: QuestionDetailsFragment, height: Int){
+        var params = transition_con.layoutParams
+        params.height = height
+        transition_con.layoutParams = params
+        val transition = Transitioner(startView, transition_con)
+        transition.duration = 300
+        transition.animateTo(1f)
+        transition.onProgressChanged {
+            if(transition.currentProgress == 1f){
+                activity.fragmentManager.beginTransaction().replace(R.id.main_fragment_placeholder,
+                        questionDetailsFragment)
+                        .addToBackStack(null)
+                        .commit()
+            }
+        }
+    }
 
 }

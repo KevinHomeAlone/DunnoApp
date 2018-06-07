@@ -4,6 +4,7 @@ package com.pieprzak.kevin.dunno.Fragments
 import android.os.Bundle
 import android.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +16,12 @@ import com.pieprzak.kevin.dunno.Model.Question
 import com.pieprzak.kevin.dunno.R
 import com.pieprzak.kevin.dunno.Utilities.DialogFactory
 import com.pieprzak.kevin.dunno.Utilities.ServerConnection
+import com.pieprzak.kevin.dunno.Utilities.SharedPreferencesConnection
+import com.pieprzak.kevin.dunno.Utilities.Validators
+import kotlinx.android.synthetic.main.custom_dialog_add_answer.view.*
 import kotlinx.android.synthetic.main.fragment_question_details.*
 import kotlinx.android.synthetic.main.fragment_question_details.view.*
 import kotlinx.android.synthetic.main.question_row.view.*
-import org.jetbrains.anko.act
 
 private const val ARG_PARAM_QUESTION = "question_param"
 
@@ -26,15 +29,21 @@ class QuestionDetailsFragment : Fragment() {
 
     private var question: Question? = null
     private var noInternetDialog: MaterialDialog? = null
+    private var addAnswerDialog: MaterialDialog? = null
+    private var progressDialogAddingAnswer: MaterialDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         question = arguments.getSerializable(ARG_PARAM_QUESTION) as Question
 
+        progressDialogAddingAnswer = DialogFactory.buildProgressDialog(activity,
+                getString(R.string.adding_answer), getString(R.string.please_wait))
         noInternetDialog = DialogFactory.buildNoInternetDialog(activity, {
-            getQuestionsFromServer(view)
+            getAnswersFromServer(view)
         })
+
+        addAnswerDialog = DialogFactory.buildAddAnswerDialog(activity)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -44,13 +53,33 @@ class QuestionDetailsFragment : Fragment() {
         view.titleTextView.text = question!!.title
         view.contentTextView.text = question!!.body
         view.userTextView.text = question!!.author
+        addAnswerDialog!!.customView!!.answerQuestionTextView.text = question!!.title
 
         view.swipecontainerQuestionAnswers.setOnRefreshListener {
-            getQuestionsFromServer(view)
+            getAnswersFromServer(view)
+        }
+
+        addAnswerDialog!!.customView!!.acceptTextViewAddAnswerDialog.setOnClickListener{
+            val contentTextView = addAnswerDialog!!.customView!!.answerBodyTextInput
+
+            if(Validators.validateAnyTextField(addAnswerDialog!!.context, contentTextView)
+                    && Validators.validateTextFieldLength(addAnswerDialog!!.context, contentTextView, 128)){
+                val userName = SharedPreferencesConnection.getLogin(activity)
+                val content = contentTextView.text.toString()
+                val answer = Answer(null, content, null, null, null, userName)
+                Log.d("Created answer: ", "$content $userName")
+                contentTextView.text.clear()
+                addAnswerDialog!!.hide()
+                addAnswerToServer(question!!.id!!, answer, view)
+            }
+        }
+
+        view.fabAnswers.setOnClickListener {
+            addAnswerDialog!!.show()
         }
 
         if(question!!.answers.isEmpty()){
-            getQuestionsFromServer(view)
+            getAnswersFromServer(view)
         }else{
             view.recyclerViewQuestionAnswers.layoutManager = LinearLayoutManager(this.activity)
             view.recyclerViewQuestionAnswers.adapter =
@@ -62,7 +91,7 @@ class QuestionDetailsFragment : Fragment() {
     }
 
 
-    private fun getQuestionsFromServer(view : View) {
+    private fun getAnswersFromServer(view : View) {
         if (view.swipecontainerQuestionAnswers == null){
         }else if(!view.swipecontainerQuestionAnswers.isRefreshing)
             view.swipecontainerQuestionAnswers.isRefreshing = true
@@ -86,7 +115,27 @@ class QuestionDetailsFragment : Fragment() {
         }, {
             dismissLoading()
             DialogFactory.showNoInternetDialog(activity,{
-                getQuestionsFromServer(view)
+                getAnswersFromServer(view)
+            })
+        })
+    }
+
+    fun addAnswerToServer(questionId: Int, answer: Answer, view: View){
+        progressDialogAddingAnswer!!.show()
+        ServerConnection.checkInternetConnection(activity, {
+            if (activity != null) {
+                ServerConnection.addAnswer(questionId, answer, {
+                    progressDialogAddingAnswer!!.hide()
+                    getAnswersFromServer(view)
+                }, { exception ->
+                    progressDialogAddingAnswer!!.hide()
+                    DialogFactory.showErrorDialog(activity, exception)
+                })
+            }
+        }, {
+            progressDialogAddingAnswer!!.hide()
+            DialogFactory.showNoInternetDialog(activity, {
+                addAnswerToServer(questionId, answer, view)
             })
         })
     }

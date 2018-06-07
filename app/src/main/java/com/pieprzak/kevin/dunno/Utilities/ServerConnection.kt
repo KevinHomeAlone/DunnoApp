@@ -156,6 +156,32 @@ object ServerConnection {
     }
 
     /**
+     * Adds new question
+     * @param author is username of author [String]
+     * @param title is title of a question [String]
+     * @param body is body of a question [String]
+     * @param succes is a callback
+     * @param error is a callback, with (Exception thrown by connection [Exception])
+     */
+    fun addAnswer(questionId: Int, answer: Answer, succes: () -> Unit, error: (Exception) -> Unit) {
+        Fuel.post("questions/$questionId/answers")
+                .body(Klaxon().toJsonString(answer))
+                .header(Pair("Content-Type", "application/json"))
+                .response { request, response, result ->
+                    // Fold result of query
+                    result.fold({ _ ->
+                        // Call success
+                        succes()
+                    }, { fuelError ->
+                        Log.e("ERROR", fuelError.toString())
+                        Log.e("RESPONSE", response.responseMessage)
+                        Log.e("REQUEST", request.toString())
+                        error(fuelError.exception)
+                    })
+                }
+    }
+
+    /**
      * Checks internet connection by pinging google.com
      * @param context Application context
      * @param online is a callback, when ping is succesfull

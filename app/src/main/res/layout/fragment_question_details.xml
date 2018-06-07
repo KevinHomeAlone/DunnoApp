@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/question_row" />
+        layout="@layout/question_row"/>
 
     <TextView
         android:id="@+id/textViewAnswers"
@@ -44,5 +44,19 @@
 
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabAnswers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/swipecontainerQuestionAnswers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.911"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/swipecontainerQuestionAnswers"
+        app:layout_constraintVertical_bias="0.934"
+        app:srcCompat="@drawable/ic_add"/>
 
 </android.support.constraint.ConstraintLayout>

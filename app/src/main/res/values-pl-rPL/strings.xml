@@ -28,4 +28,7 @@
     <string name="answers">Odpowiedzi</string>
     <string name="answered">odpowiedział...</string>
     <string name="user">Użytkownik</string>
+    <string name="answer">Odpowiedz</string>
+    <string name="answer_max_128">Odpowiedź (max 128 znaków)</string>
+    <string name="adding_answer">Dodawanie odpowiedzi</string>
 </resources>

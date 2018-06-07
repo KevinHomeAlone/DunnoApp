@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/answerQuestionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dunno"
+        android:textSize="18sp"
+        />
+
     <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/titleAddQuestionDialog"
+            android:id="@+id/answerBodyTextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapSentences"
-            android:maxLines="2"
-            android:hint="@string/title_max_32" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/contentAddQuestionDialog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textCapSentences"
-            android:hint="@string/content_max_128"
-            android:maxLines="20"/>
+            android:maxLines="15"
+            android:hint="@string/answer_max_128" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
-        android:id="@+id/acceptTextViewAddQuestionDialog"
+        android:id="@+id/acceptTextViewAddAnswerDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"

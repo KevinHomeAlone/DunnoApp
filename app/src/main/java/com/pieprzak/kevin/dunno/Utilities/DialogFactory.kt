@@ -70,4 +70,18 @@ object DialogFactory {
                 .build()
     }
 
+    fun buildAddAnswerDialog(activity: Activity): MaterialDialog{
+        return MaterialDialog.Builder(activity)
+                .title(R.string.answer)
+                .customView(R.layout.custom_dialog_add_answer, true)
+                /*.positiveText(R.string.accept)
+                .onPositive { dialog, _ ->
+
+                    if(Validators.validateAnyTextField(dialog.context, titleTextView)
+                    && Validators.validateAnyTextField(dialog.context, contentTextView))
+                        acceptAction(titleTextView.text.toString(), contentTextView.text.toString())
+                }*/
+                .build()
+    }
+
 }

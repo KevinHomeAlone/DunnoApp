@@ -2,6 +2,7 @@ package com.pieprzak.kevin.dunno.Model
 
 import com.beust.klaxon.Json
 import org.json.JSONObject
+import java.io.Serializable
 
 data class Answer (
         var id : Int?,
@@ -10,7 +11,7 @@ data class Answer (
         var createdAt : String?,
         var updatedAt : String?,
         var author : String
-){
+) : Serializable{
     companion object {
         fun fromJson(json: JSONObject) : Answer{
             val id = json.getInt("id")

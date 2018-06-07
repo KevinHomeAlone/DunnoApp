@@ -30,12 +30,12 @@ class QuestionsRecyclerAdapter(private val listOfQuestions: ArrayList<Question>,
     }
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
-        holder.bind(listOfQuestions[position], activity)
+        holder.bind(listOfQuestions[position], activity, fragment)
     }
 }
 
 class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(item: Question, activity: Activity) {
+    fun bind(item: Question, activity: Activity, fragment: QuestionsFragment) {
 
         Log.d("Question ", "${item.title} ${item.createdAt}")
         itemView.userTextView.text = item.author
@@ -47,10 +47,7 @@ class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             bundle.putSerializable(ARG_PARAM_QUESTION, item)
             val questionDetailsFragment = QuestionDetailsFragment()
             questionDetailsFragment.arguments = bundle
-            activity.fragmentManager.beginTransaction().replace(R.id.main_fragment_placeholder,
-                    questionDetailsFragment)
-                    .addToBackStack(null)
-                    .commit()
+            fragment.makeTransition(itemView,questionDetailsFragment, itemView.height)
         }
     }
 }
