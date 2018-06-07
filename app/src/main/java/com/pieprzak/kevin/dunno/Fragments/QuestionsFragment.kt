@@ -97,7 +97,7 @@ class QuestionsFragment : Fragment() {
             if (activity != null) {
                 ServerConnection.getAllQuestions({ listOfQuestions ->
                     this.listOfQuestions = listOfQuestions
-                    this.listOfQuestions.sortWith(compareBy{it.title})
+                    this.listOfQuestions.sortWith(compareByDescending{it.createdAt})
                     if (recyclerViewQuestions != null) {
                         recyclerViewQuestions.layoutManager = LinearLayoutManager(activity)
                         recyclerViewQuestions.adapter = QuestionsRecyclerAdapter(listOfQuestions, this, activity)

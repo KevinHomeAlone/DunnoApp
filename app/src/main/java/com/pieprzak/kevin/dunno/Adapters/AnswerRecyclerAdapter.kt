@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.pieprzak.kevin.dunno.Model.Answer
 import com.pieprzak.kevin.dunno.R
+import com.pieprzak.kevin.dunno.Utilities.Tools
 import kotlinx.android.synthetic.main.answer_row.view.*
 
 class AnswerRecyclerAdapter(private val listOfAnswers : ArrayList<Answer>, val activity: Activity)
@@ -33,6 +34,7 @@ class AnswerViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         Log.d("Answer ", "${item.author} ${item.body}")
         itemView.userTextViewAnswer.text = item.author
         itemView.contentTextViewAnswer.text = item.body
+        itemView.dateCreatedTextViewAnswer.text = Tools.dateToString(item.createdAt!!)
     }
 
 }

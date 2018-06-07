@@ -14,10 +14,7 @@ import com.pieprzak.kevin.dunno.Model.Answer
 import com.pieprzak.kevin.dunno.Model.Question
 
 import com.pieprzak.kevin.dunno.R
-import com.pieprzak.kevin.dunno.Utilities.DialogFactory
-import com.pieprzak.kevin.dunno.Utilities.ServerConnection
-import com.pieprzak.kevin.dunno.Utilities.SharedPreferencesConnection
-import com.pieprzak.kevin.dunno.Utilities.Validators
+import com.pieprzak.kevin.dunno.Utilities.*
 import kotlinx.android.synthetic.main.custom_dialog_add_answer.view.*
 import kotlinx.android.synthetic.main.fragment_question_details.*
 import kotlinx.android.synthetic.main.fragment_question_details.view.*
@@ -53,6 +50,7 @@ class QuestionDetailsFragment : Fragment() {
         view.titleTextView.text = question!!.title
         view.contentTextView.text = question!!.body
         view.userTextView.text = question!!.author
+        view.dateCreatedTextView.text = Tools.dateToString(question!!.createdAt!!)
         addAnswerDialog!!.customView!!.answerQuestionTextView.text = question!!.title
 
         view.swipecontainerQuestionAnswers.setOnRefreshListener {
@@ -100,7 +98,7 @@ class QuestionDetailsFragment : Fragment() {
             if (activity != null) {
                 ServerConnection.getAnswersToQuestion(question!!.id!!, { listOfAnswers ->
                     question!!.answers = listOfAnswers
-                    question!!.answers.sortWith(compareBy{it.updatedAt})
+                    question!!.answers.sortWith(compareByDescending{it.createdAt})
                     if (recyclerViewQuestionAnswers != null) {
                         recyclerViewQuestionAnswers.layoutManager = LinearLayoutManager(activity)
                         recyclerViewQuestionAnswers.adapter = AnswerRecyclerAdapter(question!!.answers,

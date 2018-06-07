@@ -37,6 +37,17 @@
         app:layout_constraintTop_toTopOf="@+id/userTextViewAnswer" />
 
         <TextView
+            android:id="@+id/dateCreatedTextViewAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:text="@string/created"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/userTextViewAnswer" />
+
+        <TextView
         android:id="@+id/contentTextViewAnswer"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

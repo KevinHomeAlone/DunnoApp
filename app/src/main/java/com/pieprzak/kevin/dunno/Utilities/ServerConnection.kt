@@ -89,6 +89,7 @@ object ServerConnection {
                         for(i in 0 until json.array().length())
                             listOfQuestions.add(Question.fromJson(json.array().getJSONObject(i)))
 
+
                         //val listOfQuestions = Klaxon().parseArray<Question>(json.content)
                         // Call success
                         succes(listOfQuestions)
