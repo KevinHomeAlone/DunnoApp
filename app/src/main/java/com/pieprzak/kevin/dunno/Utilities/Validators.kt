@@ -20,4 +20,16 @@ object Validators {
             else -> true
         }
     }
+
+    fun validateTextFieldLength(context: Context, textField: EditText, length: Int): Boolean{
+        val text = textField.text.toString()
+
+        return when{
+            text.length > length -> {
+                textField.error = (context.getString(R.string.over_the_max_chars_count) + " " + length.toString())
+                false
+            }
+            else -> true
+        }
+    }
 }

@@ -22,4 +22,10 @@
     <string name="add_dunno">Dodaj dunnosa</string>
     <string name="accept">Potwierdź</string>
     <string name="adding_dunno">Dodaje dunnosa</string>
+    <string name="title_max_32">Tytuł (max 32 znaki)</string>
+    <string name="content_max_128">Treść (max 128 znaków)</string>
+    <string name="over_the_max_chars_count">"Powyżej dopuszczalnej liczby znaków: "</string>
+    <string name="answers">Odpowiedzi</string>
+    <string name="answered">odpowiedział...</string>
+    <string name="user">Użytkownik</string>
 </resources>

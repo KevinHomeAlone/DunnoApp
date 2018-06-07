@@ -8,6 +8,7 @@ import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.core.FuelManager
 import com.keiferstone.nonet.ConnectionStatus
 import com.keiferstone.nonet.NoNet
+import com.pieprzak.kevin.dunno.Model.Answer
 import com.pieprzak.kevin.dunno.Model.Question
 import org.json.JSONObject
 
@@ -90,6 +91,35 @@ object ServerConnection {
                         //val listOfQuestions = Klaxon().parseArray<Question>(json.content)
                         // Call success
                         succes(listOfQuestions)
+                    }, { fuelError ->
+                        Log.e("ERROR", fuelError.toString())
+                        Log.e("RESPONSE", response.responseMessage)
+                        Log.e("REQUEST", request.toString())
+                        error(fuelError.exception)
+                    })
+                }
+    }
+
+    /**
+     * Downloads all answers to question
+     * @param id is an id of question that answers should be downloaded
+     * @param succes is a callback, with (List of answers [ArrayList]<[Answer]>)
+     * @param error is a callback, with (Exception thrown by connection [Exception])
+     */
+    fun getAnswersToQuestion(id : Int, succes: (ArrayList<Answer>) -> Unit, error: (Exception) -> Unit) {
+        Fuel.get("questions/$id/answers")
+                .responseJson { request, response, result ->
+                    // Fold result of query
+                    result.fold({ json ->
+                        Log.d("JSON", json.content)
+                        // Deserialize JSON
+                        var listOfAnswers = ArrayList<Answer>()
+                        for(i in 0 until json.array().length())
+                            listOfAnswers.add(Answer.fromJson(json.array().getJSONObject(i)))
+
+                        //val listOfQuestions = Klaxon().parseArray<Question>(json.content)
+                        // Call success
+                        succes(listOfAnswers)
                     }, { fuelError ->
                         Log.e("ERROR", fuelError.toString())
                         Log.e("RESPONSE", response.responseMessage)

@@ -52,7 +52,9 @@ class QuestionsFragment : Fragment() {
             val contentTextView = addQuestionDialog!!.customView!!.contentAddQuestionDialog
 
             if(Validators.validateAnyTextField(addQuestionDialog!!.context, titleTextView)
-                    && Validators.validateAnyTextField(addQuestionDialog!!.context, contentTextView)){
+                    && Validators.validateTextFieldLength(addQuestionDialog!!.context, titleTextView, 32)
+                    && Validators.validateAnyTextField(addQuestionDialog!!.context, contentTextView)
+                    && Validators.validateTextFieldLength(addQuestionDialog!!.context, contentTextView, 128)){
                 val userName = SharedPreferencesConnection.getLogin(activity)
                 val title = titleTextView.text.toString()
                 val content = contentTextView.text.toString()
@@ -75,7 +77,7 @@ class QuestionsFragment : Fragment() {
         } else {
             view.recyclerViewQuestions.layoutManager = LinearLayoutManager(activity)
             view.recyclerViewQuestions.adapter =
-                    QuestionsRecyclerAdapter(listOfQuestions, this)
+                    QuestionsRecyclerAdapter(listOfQuestions, this, activity)
         }
 
         // Inflate the layout for this fragment
@@ -95,7 +97,7 @@ class QuestionsFragment : Fragment() {
                     this.listOfQuestions.sortWith(compareBy{it.title})
                     if (recyclerViewQuestions != null) {
                         recyclerViewQuestions.layoutManager = LinearLayoutManager(activity)
-                        recyclerViewQuestions.adapter = QuestionsRecyclerAdapter(listOfQuestions, this)
+                        recyclerViewQuestions.adapter = QuestionsRecyclerAdapter(listOfQuestions, this, activity)
                     }
                     dismissLoading()
                 }, { exception ->

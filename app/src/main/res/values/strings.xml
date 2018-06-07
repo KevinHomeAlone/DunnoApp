@@ -32,4 +32,10 @@
     <string name="accept">Accept</string>
     <string name="adding_dunno">Adding dunno</string>
     <string name="dunno">dunno...</string>
+    <string name="title_max_32">Title (max 32 chars)</string>
+    <string name="content_max_128">Content (max 128 chars)</string>
+    <string name="over_the_max_chars_count">Over the max chars count:</string>
+    <string name="answers">Answers</string>
+    <string name="answered">answered...</string>
+    <string name="user">User</string>
 </resources>

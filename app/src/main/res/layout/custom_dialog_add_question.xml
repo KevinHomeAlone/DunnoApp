@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapSentences"
-            android:hint="@string/title" />
+            android:hint="@string/title_max_32" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapSentences"
-            android:hint="@string/content"
+            android:hint="@string/content_max_128"
             android:maxLines="20"/>
     </android.support.design.widget.TextInputLayout>
 
