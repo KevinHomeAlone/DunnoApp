@@ -22,3 +22,4 @@ Dunno
 * [Klaxon](https://github.com/cbeust/klaxon)
 * [MaterialDialogs](https://github.com/afollestad/material-dialogs)
 * [Fuel](https://github.com/kittinunf/Fuel)
+* [Transitioner](https://github.com/dev-labs-bg/transitioner)

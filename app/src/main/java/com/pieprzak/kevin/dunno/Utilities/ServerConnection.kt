@@ -25,6 +25,7 @@ object ServerConnection {
 
         //TODO: delete when normal authentication implemented
         creditials["play_console_tests"] = "play_console_tests"
+        creditials["krysia"] = "krysia"
         creditials["kevin"] = "kevin"
         creditials["igor"] = "igor"
         creditials["mateusz"] = "mateusz"
