@@ -7,12 +7,12 @@
         android:title="@string/dunnos" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_my_dunnos"
         android:icon="@drawable/ic_person_pin_black_24dp"
         android:title="@string/my_dunnos" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_build_black_24dp"
         android:title="@string/settings" />
 

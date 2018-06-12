@@ -42,4 +42,5 @@
     <string name="answer_max_128">Answer (max 128 chars)</string>
     <string name="adding_answer">Adding answer</string>
     <string name="password_have_to_be_longer">Password have to be longer than 8 chars</string>
+    <string name="logout">Logout</string>
 </resources>

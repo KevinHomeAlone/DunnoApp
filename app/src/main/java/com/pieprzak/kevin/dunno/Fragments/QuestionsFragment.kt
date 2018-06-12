@@ -20,21 +20,28 @@ import com.pieprzak.kevin.dunno.Utilities.DialogFactory
 import com.pieprzak.kevin.dunno.Utilities.ServerConnection
 import com.pieprzak.kevin.dunno.Utilities.SharedPreferencesConnection
 import com.pieprzak.kevin.dunno.Utilities.Validators
-import kotlinx.android.synthetic.main.fragment_questions.*
-import kotlinx.android.synthetic.main.fragment_questions.view.*
 import kotlinx.android.synthetic.main.custom_dialog_add_question.view.*
+import kotlinx.android.synthetic.main.questions_view.*
+import kotlinx.android.synthetic.main.questions_view.view.*
+
+private const val ARG_IS_USER_DUNNOS_FRAGMENT = "user_dunnos"
 
 
 class QuestionsFragment : Fragment() {
 
     private var listOfQuestions: ArrayList<Question> = ArrayList()
+    private var listOfUserQuestions: ArrayList<Question> = ArrayList()
     private var progressDialogLoadingQuestions: MaterialDialog? = null
     private var progressDialogAddingQuestion: MaterialDialog? = null
     private var addQuestionDialog : MaterialDialog? = null
+    private var isUserDunnosFragment : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if(arguments.containsKey(ARG_IS_USER_DUNNOS_FRAGMENT)){
+            isUserDunnosFragment = arguments.getBoolean(ARG_IS_USER_DUNNOS_FRAGMENT)
+        }
         progressDialogLoadingQuestions = DialogFactory.buildProgressDialog(activity,
                 getString(R.string.loading_dunnos), getString(R.string.please_wait))
         progressDialogAddingQuestion = DialogFactory.buildProgressDialog(activity,
@@ -44,7 +51,12 @@ class QuestionsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_questions, container, false)
+        val layout = when(isUserDunnosFragment){
+            true -> R.layout.fragment_questions_user
+            else -> R.layout.fragment_questions
+        }
+
+        val view = inflater.inflate(layout, container, false)
 
         view.swipeContainerQuestions.setOnRefreshListener {
             getQuestionsFromServer()
@@ -78,9 +90,7 @@ class QuestionsFragment : Fragment() {
         if (listOfQuestions.isEmpty()) {
             getQuestionsFromServer()
         } else {
-            view.recyclerViewQuestions.layoutManager = LinearLayoutManager(activity)
-            view.recyclerViewQuestions.adapter =
-                    QuestionsRecyclerAdapter(listOfQuestions, this, activity)
+            reloadRecyclerView(view)
         }
 
         // Inflate the layout for this fragment
@@ -90,17 +100,18 @@ class QuestionsFragment : Fragment() {
     private fun getQuestionsFromServer() {
         if (swipeContainerQuestions == null){
             progressDialogLoadingQuestions!!.show()
-        }else if(!swipeContainerQuestions.isRefreshing)
-            swipeContainerQuestions.isRefreshing = true
+        }else if(!view.swipeContainerQuestions.isRefreshing)
+            view.swipeContainerQuestions.isRefreshing = true
 
         ServerConnection.checkInternetConnection(activity, {
             if (activity != null) {
                 ServerConnection.getAllQuestions(activity, { listOfQuestions ->
                     this.listOfQuestions = listOfQuestions
+                    val login = SharedPreferencesConnection.getLogin(activity)
                     this.listOfQuestions.sortWith(compareByDescending{it.createdAt})
-                    if (recyclerViewQuestions != null) {
-                        recyclerViewQuestions.layoutManager = LinearLayoutManager(activity)
-                        recyclerViewQuestions.adapter = QuestionsRecyclerAdapter(listOfQuestions, this, activity)
+                    this.listOfUserQuestions = ArrayList(this.listOfQuestions.filter{ it.author == login })
+                    if (view.recyclerViewQuestions != null) {
+                        reloadRecyclerView(view)
                     }
                     dismissLoading()
                 }, { exception ->
@@ -137,17 +148,17 @@ class QuestionsFragment : Fragment() {
     }
 
     fun dismissLoading(){
-        if (swipeContainerQuestions.isRefreshing)
-            swipeContainerQuestions.isRefreshing = false
+        if (view.swipeContainerQuestions.isRefreshing)
+            view.swipeContainerQuestions.isRefreshing = false
         if (progressDialogLoadingQuestions != null)
             progressDialogLoadingQuestions!!.dismiss()
     }
 
     fun makeTransition(startView: View, questionDetailsFragment: QuestionDetailsFragment, height: Int){
-        var params = transition_con.layoutParams
+        var params = view.transition_con.layoutParams
         params.height = height
-        transition_con.layoutParams = params
-        val transition = Transitioner(startView, transition_con)
+        view.transition_con.layoutParams = params
+        val transition = Transitioner(startView, view.transition_con)
         transition.duration = 300
         transition.animateTo(1f)
         transition.onProgressChanged {
@@ -158,6 +169,17 @@ class QuestionsFragment : Fragment() {
                         .commit()
             }
         }
+    }
+
+    fun reloadRecyclerView(view: View){
+        if(isUserDunnosFragment){
+            view.recyclerViewQuestions.layoutManager = LinearLayoutManager(activity)
+            view.recyclerViewQuestions.adapter = QuestionsRecyclerAdapter(listOfUserQuestions, this, activity)
+        }else{
+            view.recyclerViewQuestions.layoutManager = LinearLayoutManager(activity)
+            view.recyclerViewQuestions.adapter = QuestionsRecyclerAdapter(listOfQuestions, this, activity)
+        }
+
     }
 
 }
