@@ -96,7 +96,7 @@ class QuestionDetailsFragment : Fragment() {
 
         ServerConnection.checkInternetConnection(activity, {
             if (activity != null) {
-                ServerConnection.getAnswersToQuestion(question!!.id!!, { listOfAnswers ->
+                ServerConnection.getAnswersToQuestion(activity, question!!.id!!, { listOfAnswers ->
                     question!!.answers = listOfAnswers
                     question!!.answers.sortWith(compareByDescending{it.createdAt})
                     if (recyclerViewQuestionAnswers != null) {
@@ -122,7 +122,7 @@ class QuestionDetailsFragment : Fragment() {
         progressDialogAddingAnswer!!.show()
         ServerConnection.checkInternetConnection(activity, {
             if (activity != null) {
-                ServerConnection.addAnswer(questionId, answer, {
+                ServerConnection.addAnswer(activity, questionId, answer, {
                     progressDialogAddingAnswer!!.hide()
                     getAnswersFromServer(view)
                 }, { exception ->

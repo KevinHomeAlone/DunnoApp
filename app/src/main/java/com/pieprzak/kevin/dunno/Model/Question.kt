@@ -29,7 +29,7 @@ data class Question (
             val body = json.getString("body")
             val createdAt = Tools.parseDate(json.getString("created_at"))
             val updatedAt = Tools.parseDate(json.getString("updated_at"))
-            val author = json.getString("author")
+            val author = json.getString("id")
             return Question(id, title, body, createdAt, updatedAt, author, ArrayList())
         }
     }

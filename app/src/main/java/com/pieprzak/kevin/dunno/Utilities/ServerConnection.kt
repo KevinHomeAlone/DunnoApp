@@ -14,23 +14,12 @@ import org.json.JSONObject
 
 object ServerConnection {
 
-    //TODO: delete when normal authentication implemented
-    var creditials = HashMap<String, String>()
     /**
      * Init specifies base path for Fuel
      * To be used as HTTP request root directory
      */
     init {
-        FuelManager.instance.basePath = "http://37.233.102.13:3000/api/"
-
-        //TODO: delete when normal authentication implemented
-        creditials["play_console_tests"] = "play_console_tests"
-        creditials["krysia"] = "krysia"
-        creditials["kevin"] = "kevin"
-        creditials["igor"] = "igor"
-        creditials["mateusz"] = "mateusz"
-        creditials["pawel"] = "pawel"
-        creditials["radek"] = "radek"
+        FuelManager.instance.basePath = "http://37.233.102.13:3000/api"
     }
 
     /**
@@ -43,12 +32,13 @@ object ServerConnection {
 
     fun loginWithLogin(login: String, password: String, success: (String) -> Unit, error: (Exception) -> Unit) {
 
-        /*// HTTP request body
+        // HTTP request body
         val body = JSONObject()
-        body.put("user", login)
+        body.put("login", login)
         body.put("password", password)
 
-        Fuel.post("API/login")
+        Fuel.post("login")
+                .header(Pair("Content-Type", "application/json"))
                 .body(body.toString())
                 .responseJson { request, response, result ->
                     // Fold result of query
@@ -56,19 +46,14 @@ object ServerConnection {
                         Log.d("JSON login", json.obj().toString())
                         val receivedJSON = json.obj()
                         val token = receivedJSON.getString("token")
-                        succes(token)
+                        success(token)
                     }, { fuelError ->
                         Log.e("ERROR", fuelError.toString())
                         Log.e("RESPONSE", response.responseMessage)
                         Log.e("REQUEST", request.toString())
                         error(fuelError.exception)
                     })
-                }*/
-        if(creditials.containsKey(login) && creditials[login] == password)
-            success("chujTokenJaPierdole")
-        else
-            error(Exception())
-
+                }
     }
 
     /**
@@ -76,12 +61,15 @@ object ServerConnection {
      * @param succes is a callback, with (List of questions [ArrayList]<[Question]>)
      * @param error is a callback, with (Exception thrown by connection [Exception])
      */
-    fun getAllQuestions(succes: (ArrayList<Question>) -> Unit, error: (Exception) -> Unit) {
-        Fuel.get("questions")
+    fun getAllQuestions(context: Context, succes: (ArrayList<Question>) -> Unit, error: (Exception) -> Unit) {
+        val token = SharedPreferencesConnection.getAccessToken(context)
+        Fuel.get("questions", listOf(Pair("user_credentials", token)))
+                .header(Pair("Content-Type", "application/json"))
                 .responseJson { request, response, result ->
                     // Fold result of query
                     result.fold({ json ->
                         Log.d("JSON", json.content)
+                        Log.d("url", request.path)
                         // Deserialize JSON
                         var listOfQuestions = ArrayList<Question>()
                         //FIXME: Why klaxon stops progrss dialog?
@@ -108,8 +96,9 @@ object ServerConnection {
      * @param succes is a callback, with (List of answers [ArrayList]<[Answer]>)
      * @param error is a callback, with (Exception thrown by connection [Exception])
      */
-    fun getAnswersToQuestion(id : Int, succes: (ArrayList<Answer>) -> Unit, error: (Exception) -> Unit) {
-        Fuel.get("questions/$id/answers")
+    fun getAnswersToQuestion(context: Context, id : Int, succes: (ArrayList<Answer>) -> Unit, error: (Exception) -> Unit) {
+        val token = SharedPreferencesConnection.getAccessToken(context)
+        Fuel.get("questions/$id/answers", listOf(Pair("user_credentials", token)))
                 .responseJson { request, response, result ->
                     // Fold result of query
                     result.fold({ json ->
@@ -139,8 +128,9 @@ object ServerConnection {
      * @param succes is a callback
      * @param error is a callback, with (Exception thrown by connection [Exception])
      */
-    fun addQuestion(question: Question, succes: () -> Unit, error: (Exception) -> Unit) {
-        Fuel.post("questions")
+    fun addQuestion(context: Context, question: Question, succes: () -> Unit, error: (Exception) -> Unit) {
+        val token = SharedPreferencesConnection.getAccessToken(context)
+        Fuel.post("questions?user_credentials=$token")
                 .body(Klaxon().toJsonString(question))
                 .header(Pair("Content-Type", "application/json"))
                 .response { request, response, result ->
@@ -165,11 +155,13 @@ object ServerConnection {
      * @param succes is a callback
      * @param error is a callback, with (Exception thrown by connection [Exception])
      */
-    fun addAnswer(questionId: Int, answer: Answer, succes: () -> Unit, error: (Exception) -> Unit) {
-        Fuel.post("questions/$questionId/answers")
+    fun addAnswer(context: Context, questionId: Int, answer: Answer, succes: () -> Unit, error: (Exception) -> Unit) {
+        val token = SharedPreferencesConnection.getAccessToken(context)
+        Fuel.post("questions/$questionId/answers?user_credentials=$token")
                 .body(Klaxon().toJsonString(answer))
                 .header(Pair("Content-Type", "application/json"))
                 .response { request, response, result ->
+                    Log.d("url", request.path)
                     // Fold result of query
                     result.fold({ _ ->
                         // Call success

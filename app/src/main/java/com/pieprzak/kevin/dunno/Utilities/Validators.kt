@@ -32,4 +32,16 @@ object Validators {
             else -> true
         }
     }
+
+    fun validatePasswordTextField(context: Context, textField: EditText): Boolean{
+        val text = textField.text.toString()
+
+        return when {
+            text.isBlank() || text.length < 8 -> {
+                textField.error = context.getString(R.string.password_have_to_be_longer)
+                false
+            }
+            else -> true
+        }
+    }
 }

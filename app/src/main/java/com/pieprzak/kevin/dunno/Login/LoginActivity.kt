@@ -22,12 +22,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val accessToken = SharedPreferencesConnection.getAccessToken(this)
-
-        if (!accessToken.isBlank()) {
+        if(accessToken.isBlank() || accessToken == "chujTokenJaPierdole"){ //TODO: Remove when logout added
+            SharedPreferencesConnection.clearSharedPreferences(this)
+            bindUI()
+        } else {
             runMainActivity()
             finish()
-        }else
-            bindUI()
+        }
     }
 
     private fun bindUI(){
@@ -44,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
         signin_button.setOnClickListener {
             if (Validators.validateAnyTextField(this, login_input_text)
-                    && Validators.validateAnyTextField(this, password_input_text)) {
+                    && Validators.validatePasswordTextField(this, password_input_text)) {
                 attemptLogin()
             }
         }

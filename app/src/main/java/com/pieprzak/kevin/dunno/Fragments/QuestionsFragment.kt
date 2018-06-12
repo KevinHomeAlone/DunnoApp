@@ -95,7 +95,7 @@ class QuestionsFragment : Fragment() {
 
         ServerConnection.checkInternetConnection(activity, {
             if (activity != null) {
-                ServerConnection.getAllQuestions({ listOfQuestions ->
+                ServerConnection.getAllQuestions(activity, { listOfQuestions ->
                     this.listOfQuestions = listOfQuestions
                     this.listOfQuestions.sortWith(compareByDescending{it.createdAt})
                     if (recyclerViewQuestions != null) {
@@ -120,7 +120,7 @@ class QuestionsFragment : Fragment() {
         progressDialogAddingQuestion!!.show()
         ServerConnection.checkInternetConnection(activity, {
             if (activity != null) {
-                ServerConnection.addQuestion(question, {
+                ServerConnection.addQuestion(activity, question, {
                     progressDialogAddingQuestion!!.hide()
                     getQuestionsFromServer()
                 }, { exception ->
