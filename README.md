@@ -2,7 +2,7 @@
 
 [**Server site repository**](https://github.com/ikurek/DunnoServer)
 
-##Authors:
+## Authors:
 * [**Kevin Pieprzak**](https://github.com/KevinHomeAlone)
 * [**Igor Kurek**](https://github.com/ikurek)
 
